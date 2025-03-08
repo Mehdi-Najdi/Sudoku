@@ -1,5 +1,4 @@
 def print_board(board):
-    """Helper function to print the Sudoku board in a readable format."""
     for i in range(9):
         if i % 3 == 0 and i != 0:
             print("-" * 21)
@@ -11,7 +10,6 @@ def print_board(board):
 
 
 def find_empty(board):
-    """Finds an empty spot on the board (represented by 0).
 
     Returns:
         A tuple (row, col) if an empty space is found, otherwise None.
@@ -24,18 +22,15 @@ def find_empty(board):
 
 
 def is_valid(board, num, pos):
-    """Checks whether placing the num at pos (row, col) is valid."""
     row, col = pos
 
     # Check row
     if num in board[row]:
         return False
 
-    # Check column
     if num in [board[i][col] for i in range(9)]:
         return False
 
-    # Check 3x3 sub-grid
     box_x = col // 3
     box_y = row // 3
     for i in range(box_y * 3, box_y * 3 + 3):
@@ -47,7 +42,6 @@ def is_valid(board, num, pos):
 
 
 def solve_sudoku(board):
-    """Solves the Sudoku puzzle using backtracking."""
     empty_pos = find_empty(board)
     if not empty_pos:
         # No empty space left, puzzle solved
@@ -61,14 +55,12 @@ def solve_sudoku(board):
             if solve_sudoku(board):
                 return True
 
-            # Backtrack
             board[row][col] = 0
 
     return False
 
 
 if __name__ == "__main__":
-    # Example Sudoku puzzle (0 represents an empty cell)
     puzzle = [
         [5, 3, 0, 0, 7, 0, 0, 0, 0],
         [6, 0, 0, 1, 9, 5, 0, 0, 0],
